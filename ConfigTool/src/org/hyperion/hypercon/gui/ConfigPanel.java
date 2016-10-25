@@ -19,6 +19,7 @@ import org.hyperion.hypercon.gui.External_Tab.InterfacePanel;
 import org.hyperion.hypercon.gui.External_Tab.XbmcPanel;
 import org.hyperion.hypercon.gui.External_Tab.ForwardPanel;
 import org.hyperion.hypercon.gui.Grabber_Tab.FrameGrabberPanel;
+import org.hyperion.hypercon.gui.Grabber_Tab.AmlGrabberPanel;
 import org.hyperion.hypercon.gui.Grabber_Tab.Grabberv4l2Panel;
 import org.hyperion.hypercon.gui.Hardware_Tab.DevicePanel;
 import org.hyperion.hypercon.gui.Hardware_Tab.ImageProcessPanel;
@@ -218,6 +219,7 @@ public class ConfigPanel extends JPanel {
 			mGrabberPanel.setLayout(new BoxLayout(mGrabberPanel, BoxLayout.Y_AXIS));
 
 			mGrabberPanel.add(new FrameGrabberPanel(ledString.mMiscConfig));
+			mGrabberPanel.add(new AmlGrabberPanel(ledString.mMiscConfig));
 			mGrabberPanel.add(new Grabberv4l2Panel(ledString.mGrabberv4l2Config));
 			mGrabberPanel.add(Box.createVerticalGlue());
 

@@ -16,6 +16,7 @@ import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.LayoutStyle;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import org.hyperion.hypercon.ErrorHandling;
@@ -92,13 +93,18 @@ public class SshSendConfigPanel extends JPanel implements Observer {
         
         GroupLayout layout = new GroupLayout(this);
         layout.setAutoCreateGaps(true);
+        layout.setAutoCreateContainerGaps(true);
         setLayout(layout);
 
         layout.setHorizontalGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup()
                                 .addGroup(layout.createSequentialGroup()
+                                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED,
+                                                GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(SourceFileButton)
-                                        .addComponent(sendConfigButton))
+                                        .addComponent(sendConfigButton)
+                                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED,
+                                                GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 ));
 
         layout.setVerticalGroup(layout.createSequentialGroup()

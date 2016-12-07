@@ -13,6 +13,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.LayoutStyle;
 
 import org.hyperion.hypercon.ErrorHandling;
 import org.hyperion.hypercon.SshConnectionModel;
@@ -92,22 +93,22 @@ public class SshManageHyperionPanel extends JPanel implements Observer {
         add(mGetLogHypButton);
         
     GroupLayout layout = new GroupLayout(this);
+    layout.setAutoCreateGaps(true);
+    layout.setAutoCreateContainerGaps(true);
     layout.setHorizontalGroup(
     	layout.createSequentialGroup()
     	.addGroup(layout.createParallelGroup()	
     	.addGroup(layout.createSequentialGroup()
-    			.addComponent(mInstallHypButton)
-    			.addComponent(mRemoveHypButton))
-    		.addGroup(layout.createSequentialGroup()
+                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED,
+                        GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         		.addComponent(mStartHypButton)
         		.addComponent(mStopHypButton)
-        		.addComponent(mGetLogHypButton))
+                .addComponent(mGetLogHypButton)
+                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED,
+                        GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
     		));
     layout.setVerticalGroup(
     	layout.createSequentialGroup()
-    		.addGroup(layout.createParallelGroup()
-    			.addComponent(mInstallHypButton)
-    			.addComponent(mRemoveHypButton))
     		.addGroup(layout.createParallelGroup()
         		.addComponent(mStartHypButton)
         		.addComponent(mStopHypButton)

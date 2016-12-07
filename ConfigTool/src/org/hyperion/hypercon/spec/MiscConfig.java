@@ -46,9 +46,21 @@ public class MiscConfig {
 	/** The height of 'grabbed' frames (screen shots) [pixels] */
 	public int mFrameGrabberHeight = 64;
 	/** The interval of frame grabs (screen shots) [ms] */
-	public int mFrameGrabberInterval_ms = 100;
+	public int mFrameGrabberInterval_ms = 50;
 	/** The Priority of the Internal Frame Grabber */
 	public int mFrameGrabberPriority = 890;
+
+//aml Grabber
+	/** Flag indicating that the Frame Grabber is enabled */
+	public boolean mAmlGrabberEnabled = false;
+	/** The width of 'grabbed' frames (screen shots) [pixels] */
+	public int mAmlGrabberWidth = 64;
+	/** The height of 'grabbed' frames (screen shots) [pixels] */
+	public int mAmlGrabberHeight = 64;
+	/** The interval of frame grabs (screen shots) [ms] */
+	public int mAmlGrabberInterval_ms = 25;
+	/** The Priority of the Internal Frame Grabber */
+	public int mAmlGrabberPriority = 890;
 
 //Kodi	
 	/** Flag indicating that the XBMC checker is enabled */
@@ -110,6 +122,22 @@ public class MiscConfig {
 			strBuf.addValue("priority", mFrameGrabberPriority, true);
 			strBuf.stopObject();
 				
+			strBuf.newLine();
+		}
+
+	// aml Grabber
+
+		if (mAmlGrabberEnabled==true){
+			String amlgrabComment = "AML GRABBER CONFIG";
+			strBuf.writeComment(amlgrabComment);
+
+			strBuf.startObject("amlgrabber");
+			strBuf.addValue("width", mAmlGrabberWidth, false);
+			strBuf.addValue("height", mAmlGrabberHeight, false);
+			strBuf.addValue("frequency_Hz", 1000.0/mAmlGrabberInterval_ms, false);
+			strBuf.addValue("priority", mAmlGrabberPriority, true);
+			strBuf.stopObject();
+
 			strBuf.newLine();
 		}
 
@@ -251,6 +279,10 @@ public class MiscConfig {
 
 		if (mFrameGrabberEnabled==false){
 			String addComment = "NO FRAME GRABBER CONFIG";
+			strBuf.writeComment(addComment);
+		}
+		if (mAmlGrabberEnabled==false){
+			String addComment = "NO AML GRABBER CONFIG";
 			strBuf.writeComment(addComment);
 		}
 		if (mBlackBorderEnabled==false){

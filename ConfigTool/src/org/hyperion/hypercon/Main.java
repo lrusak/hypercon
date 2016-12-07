@@ -23,8 +23,9 @@ public class Main {
 	/** Some application settings (for easy/dirty access) */
 	public static final HyperConConfig HyperConConfig = new HyperConConfig();
 
-	public static String versionStr = "V1.03.1"; 
-	public static String DateStr = "(11.06.2016)";
+	static Package p = Package.getPackage("org.hyperion.hypercon");
+
+	public static String versionStr = p.getImplementationVersion();
 	/**
 	 * Entry point to start HyperCon 
 	 * 
@@ -53,7 +54,7 @@ public class Main {
 		// Create a frame for the configuration panel
 		JFrame frame = new JFrame();
 		ErrorHandling.mainframe = frame;
-		String title = language.getString("general.title") + " -" + ((versionStr != null && !versionStr.isEmpty())? (" (" + versionStr + ")") : "") + " " + DateStr;
+		String title = language.getString("general.title") + " - " + ("(" + versionStr + ")");
 		frame.setTitle(title);
 		frame.setSize(1400, 800);
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);

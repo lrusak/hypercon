@@ -64,7 +64,7 @@ public class MiscConfig {
 
 //Kodi	
 	/** Flag indicating that the XBMC checker is enabled */
-	public boolean mXbmcCheckerEnabled = false;
+	public boolean mXbmcCheckerEnabled = true;
 	/** The IP-address of XBMC */
 	public String mXbmcAddress  = "127.0.0.1";
 	/** The TCP JSON-Port of XBMC */

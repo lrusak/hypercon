@@ -7,6 +7,9 @@ import org.hyperion.hypercon.spec.ColorConfig;
  * Miscellaneous configuration items for the Hyperion daemon.
  */
 public class MiscConfig {
+
+	public HyperionRemoteCalls.SystemTypes selectedSystemType = HyperionRemoteCalls.SystemTypes.libreelec;
+
 // Blackborder
 	public boolean mBlackBorderEnabled = true;
 	public double mBlackBorderThreshold = 0.00;
@@ -73,6 +76,11 @@ public class MiscConfig {
 	public boolean mforwardEnabled = false;
 	public String mProtofield = "\"127.0.0.1:19447\"";
 	public String mJsonfield = "\"127.0.0.1:19446\"";
+
+//WebConfig Server
+	public int mWebConfigPort = 8099;
+	public String mPathWebRootLE = "/storage/.kodi/addons/service.hyperion/webconfig";
+	public String mPathWebRootGEN = "/usr/share/hyperion/webconfig";
 
 //Proto/Boblight/Json Server
 	/** The TCP port at which the JSON server is listening for incoming connections */
@@ -210,6 +218,22 @@ public class MiscConfig {
 				
 			strBuf.newLine();	
 		}
+
+	// WebConfig Server
+
+			String WebserverComment = "WEBCONFIG SERVER";
+			strBuf.writeComment(WebserverComment);
+
+			strBuf.startObject("webConfig");
+			if (selectedSystemType.toString() == "LibreELEC"){
+				strBuf.addValue("document_root", mPathWebRootLE, false);
+			} else {
+				strBuf.addValue("document_root", mPathWebRootGEN, false);
+			}
+			strBuf.addValue("port", mWebConfigPort, true);
+			strBuf.stopObject();
+
+			strBuf.newLine();
 
 	// Effect Path
 

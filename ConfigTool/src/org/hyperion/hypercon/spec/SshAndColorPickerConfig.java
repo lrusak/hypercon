@@ -25,8 +25,8 @@ public class SshAndColorPickerConfig {
 	public SshAndColorPickerConfig() {
 		ipAdress = "192.168.0.3";
 		port = 22;
-		username = "pi";
-		password = "raspberry";
+		username = "root";
+		password = "libreelec";
 		colorPickerInExpertmode = false;
 		colorPickerShowColorWheel = true;
 		srcPath = "";
@@ -39,7 +39,7 @@ public class SshAndColorPickerConfig {
 		sshCommands.add(new SshCommand("sudo service hyperion restart"));
 		sshCommands.add(new SshCommand("sudo killall hyperionv4l2"));
 
-        selectedSystemType = HyperionRemoteCalls.SystemTypes.allsystems;
+        selectedSystemType = HyperionRemoteCalls.SystemTypes.libreelec;
 
 	}
 

@@ -36,6 +36,7 @@ public class SshManageHyperionPanel extends JPanel implements Observer {
 	private JButton mRemoveHypButton;
 	private JButton mStartHypButton;
 	private JButton mRestartHypButton;
+	private JButton mReloadHypButton;
 	private JButton mStopHypButton;
 	private JButton mGetLogHypButton;
 	
@@ -88,6 +89,11 @@ public class SshManageHyperionPanel extends JPanel implements Observer {
         mRestartHypButton.addActionListener(mActionListener);
         add(mRestartHypButton);
 
+        mReloadHypButton = new JButton(language.getString("ssh.sshmanage.ReloadHypButton")); //$NON-NLS-1$
+        mReloadHypButton.setToolTipText(language.getString("ssh.sshmanage.ReloadHypButtontooltip"));
+        mReloadHypButton.addActionListener(mActionListener);
+        add(mReloadHypButton);
+
         mStopHypButton = new JButton(language.getString("ssh.sshmanage.StopHypButton")); //$NON-NLS-1$
         mStopHypButton.setToolTipText(language.getString("ssh.sshmanage.StopHypButtontooltip"));
         mStopHypButton.addActionListener(mActionListener);
@@ -109,6 +115,7 @@ public class SshManageHyperionPanel extends JPanel implements Observer {
                         GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         		.addComponent(mStartHypButton)
         		.addComponent(mRestartHypButton)
+        		.addComponent(mReloadHypButton)
         		.addComponent(mStopHypButton)
                 .addComponent(mGetLogHypButton)
                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED,
@@ -119,6 +126,7 @@ public class SshManageHyperionPanel extends JPanel implements Observer {
     		.addGroup(layout.createParallelGroup()
         		.addComponent(mStartHypButton)
         		.addComponent(mRestartHypButton)
+        		.addComponent(mReloadHypButton)
         		.addComponent(mStopHypButton)
         		.addComponent(mGetLogHypButton))
     		);
@@ -139,6 +147,7 @@ private void setConnectionFieldsAcces(boolean setEnabled) {
 	mRemoveHypButton.setEnabled(setEnabled);
 	mStartHypButton.setEnabled(setEnabled);
 	mRestartHypButton.setEnabled(setEnabled);
+	mReloadHypButton.setEnabled(setEnabled);
 	mStopHypButton.setEnabled(setEnabled);
 	mGetLogHypButton.setEnabled(setEnabled);
 }
@@ -195,6 +204,13 @@ private void setConnectionFieldsAcces(boolean setEnabled) {
 	        	if(e.getSource() == mRestartHypButton){
 	        		try {
 	        			sshConnection.sendServiceRestart();
+	                } catch (JSchException e1) {
+	                    ErrorHandling.ShowException(e1);
+	                }	
+	        	}
+	        	if(e.getSource() == mReloadHypButton){
+	        		try {
+	        			sshConnection.sendServiceReload();
 	                } catch (JSchException e1) {
 	                    ErrorHandling.ShowException(e1);
 	                }	

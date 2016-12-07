@@ -76,6 +76,12 @@ public final class HyperionRemoteCalls {
         }
         return "";
     }
+    public static String getHyperionReloadServiceCallForSystemType(SystemTypes type){
+        if(type == SystemTypes.libreelec){
+            return "systemctl reload service.hyperion.service 2>/dev/null";
+        }
+        return "";
+    }
     public static String getHyperionStopServiceCallForSystemType(SystemTypes type){
         if(type == SystemTypes.allsystems){
             return "sudo systemctl stop hyperion.service 2>/dev/null; sudo /etc/init.d/hyperion stop 2>/dev/null ; sudo /sbin/initctl stop hyperion 2>/dev/null";

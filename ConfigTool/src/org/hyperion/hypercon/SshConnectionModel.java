@@ -26,6 +26,7 @@ public class SshConnectionModel extends Observable {
 	private static  String hyperionRemoveCall = "notset "; 
 	private static  String hyperionStartServiceCall = "notset "; 
 	private static  String hyperionRestartServiceCall = "notset ";
+	private static  String hyperionReloadServiceCall = "notset ";
 	private static  String hyperionStopServiceCall = "notset "; 
 	private static  String hyperionLogCall = "notset "; 
 	private static boolean printTraffic = true;
@@ -72,6 +73,9 @@ public class SshConnectionModel extends Observable {
     }
     public static void setHyperionRestartServiceCall(String hyperionRestartServiceCall) {
         SshConnectionModel.hyperionRestartServiceCall = hyperionRestartServiceCall;
+    }
+    public static void setHyperionReloadServiceCall(String hyperionReloadServiceCall) {
+        SshConnectionModel.hyperionReloadServiceCall = hyperionReloadServiceCall;
     }
     public static void setHyperionStopServiceCall(String hyperionStopServiceCall) {
         SshConnectionModel.hyperionStopServiceCall = hyperionStopServiceCall;
@@ -280,6 +284,19 @@ DEPRECATED 	-Y, --correction <arg>       Set the color correction of the leds (r
 	/**
 	 *
 	 * @return false if there is no connection, true after the command was executed
+	 */
+	public boolean sendServiceReload() throws JSchException {
+		if (isConnected()) {
+
+			mSshConnection.execute(hyperionReloadServiceCall);
+			return true;
+		}
+		return false;
+	}
+	/**
+	 *
+	 * @return false if there is no connection, true after the command was
+	 *         executed
 	 */
 	public boolean sendServiceStop() throws JSchException {
 		if(isConnected()){

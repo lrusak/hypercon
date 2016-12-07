@@ -283,6 +283,7 @@ public class SshConnectionPanel extends JPanel implements Observer {
                     SshConnectionModel.setHyperionConfigTargetCall(HyperionRemoteCalls.getConfigTargetCallForSystemType(mSshConfig.selectedSystemType));
                     SshConnectionModel.setHyperionStartServiceCall(HyperionRemoteCalls.getHyperionStartServiceCallForSystemType(mSshConfig.selectedSystemType));
                     SshConnectionModel.setHyperionRestartServiceCall(HyperionRemoteCalls.getHyperionRestartServiceCallForSystemType(mSshConfig.selectedSystemType));
+					SshConnectionModel.setHyperionReloadServiceCall(HyperionRemoteCalls.getHyperionReloadServiceCallForSystemType(mSshConfig.selectedSystemType));
                     SshConnectionModel.setHyperionStopServiceCall(HyperionRemoteCalls.getHyperionStopServiceCallForSystemType(mSshConfig.selectedSystemType));
                     SshConnectionModel.setHyperionLogCall(HyperionRemoteCalls.getHyperionLogCallForSystemType(mSshConfig.selectedSystemType));
                 } catch (Exception e1) {

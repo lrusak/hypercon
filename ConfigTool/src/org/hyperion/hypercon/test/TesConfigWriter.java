@@ -31,10 +31,10 @@ public class TesConfigWriter {
 		configFile.store(colorConfig);
 		configFile.store(imageConfig);
 		configFile.store(miscConfig);
-		configFile.save("./HyperCon.dat");
+		configFile.save("./HyperCon.conf");
 		
 		ConfigurationFile configFile2 = new ConfigurationFile();
-		configFile2.load("./HyperCon.dat");
+		configFile2.load("./HyperCon.conf");
 		configFile2.restore(deviceConfig);
 		configFile2.restore(frameConfig);
 		configFile2.restore(colorConfig);

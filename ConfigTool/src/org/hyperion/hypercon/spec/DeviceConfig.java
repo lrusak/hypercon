@@ -18,7 +18,7 @@ public class DeviceConfig {
 	/** The order of the color bytes */
 	public ColorByteOrder mColorByteOrder = ColorByteOrder.RGB;
 	
-	/**Store Device specific config for .dat here too**/
+	/**Store Device specific config for .conf here too**/
 //	public int FCP_portSpinner=8899;
 	
 	

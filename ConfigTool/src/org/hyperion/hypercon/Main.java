@@ -18,7 +18,7 @@ import org.hyperion.hypercon.spec.TransformConfig;
  * JAVA application (contains the entry-point).
  */
 public class Main {
-	public static final String configFilename = "hypercon.dat";
+	public static final String configFilename = "hypercon.conf";
 	
 	/** Some application settings (for easy/dirty access) */
 	public static final HyperConConfig HyperConConfig = new HyperConConfig();

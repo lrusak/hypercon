@@ -21,7 +21,7 @@ import org.xml.sax.SAXException;
 
 public class UpdateTool {
 
-	private static final String UPDATE_URL = "https://raw.githubusercontent.com/hyperion-project/hypercon/master/update.xml";
+	private static final String UPDATE_URL = "https://raw.githubusercontent.com/libreelec/hypercon/master/update.xml";
 	private static final String ACTUAL_VERSION = Main.versionStr;
 
 	public static void main(String[] args) {
@@ -109,9 +109,9 @@ public class UpdateTool {
 	 * @return a {@link Boolean}
 	 */
 	private static boolean isVersionActual(String updateVersion) {
-		updateVersion = updateVersion.replace("V", "").replace(".", "");
+		updateVersion = updateVersion.replace(".", "");
 		Integer updateVersionAsInt = Integer.parseInt(updateVersion);
-		String actualVersion = ACTUAL_VERSION.replace("V", "").replace(".", "");
+		String actualVersion = ACTUAL_VERSION.replace(".", "");
 		Integer actualVersionAsInt = Integer.parseInt(actualVersion);
 		return updateVersionAsInt > actualVersionAsInt;
 	}

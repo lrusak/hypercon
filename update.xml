@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <hyperionUpdateInfo>
-        <actualVersion>V1.03.1</actualVersion>
-        <versionInfo>Please visit: www.hyperion-project.org</versionInfo>
-        <updateURL>https://sourceforge.net/projects/hyperion-project/files/hypercon/HyperCon.jar/download</updateURL>
+        <actualVersion>1.0.0</actualVersion>
+        <versionInfo>Please visit: libreelec.tv</versionInfo>
+        <updateURL>http://releases.libreelec.tv/hypercon-LE.jar</updateURL>
 </hyperionUpdateInfo>

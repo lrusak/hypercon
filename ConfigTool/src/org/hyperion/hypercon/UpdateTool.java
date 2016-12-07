@@ -49,11 +49,10 @@ public class UpdateTool {
 			Element rootElement = getElementFromURL(updateUrl);
 
 			String actualVersion = rootElement.getChildText("actualVersion");
-			String versionInfo = rootElement.getChildText("versionInfo");
 			String updateURL = rootElement.getChildText("updateURL");
 
 			if (isVersionActual(actualVersion)) {
-        	    String message=language.getString("general.versioncheck.newversionmessage") + "\n\n" + language.getString("general.versioncheck.currentversiontitle") +" "+ Main.versionStr + "\n" + language.getString("general.versioncheck.newversiontitle") +" "+ actualVersion + "\n" +  language.getString("general.versioncheck.changelogtitle") +" "+ versionInfo + "\n\n" + language.getString("general.versioncheck.askfordownload");
+        	    String message=language.getString("general.versioncheck.newversionmessage") + "\n\n" + language.getString("general.versioncheck.currentversiontitle") +" "+ Main.versionStr + "\n" + language.getString("general.versioncheck.newversiontitle") +" "+ actualVersion + "\n\n" + language.getString("general.versioncheck.askfordownload");
 		        int reply = JOptionPane.showConfirmDialog(new JFrame(), message, language.getString("general.HyperConInformationDialogTitle"),
 		        		    JOptionPane.YES_NO_OPTION);
 		        	 if (reply == JOptionPane.YES_OPTION) {

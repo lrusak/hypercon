@@ -111,7 +111,7 @@ public class DevicePanel extends JPanel {
 		GroupLayout layout = new GroupLayout(this);
 		layout.setAutoCreateGaps(true);
 		setLayout(layout);
-		
+
 		layout.setHorizontalGroup(layout.createParallelGroup()
 				.addGroup(layout.createSequentialGroup()
 						.addComponent(mNameLabel)
@@ -123,16 +123,16 @@ public class DevicePanel extends JPanel {
 				.addGroup(layout.createSequentialGroup()
 						.addComponent(mRgbLabel)
 						.addComponent(mRgbCombo)));
-		layout.setVerticalGroup(layout.createParallelGroup()
-				.addGroup(layout.createSequentialGroup()
+		layout.setVerticalGroup(layout.createSequentialGroup()
+				.addGroup(layout.createParallelGroup(Alignment.CENTER)
 						.addComponent(mNameLabel)
+						.addComponent(mNameField))
+				.addGroup(layout.createParallelGroup(Alignment.CENTER)
 						.addComponent(mTypeLabel)
+						.addComponent(mTypeCombo))
 						.addComponent(mDevicePanel)
-						.addComponent(mRgbLabel))
-				.addGroup(layout.createSequentialGroup()
-						.addComponent(mNameField)
-						.addComponent(mTypeCombo)
-						.addComponent(mDevicePanel)
+				.addGroup(layout.createParallelGroup(Alignment.CENTER)
+						.addComponent(mRgbLabel)
 						.addComponent(mRgbCombo)));
 	}
 	

@@ -7,6 +7,9 @@ import org.hyperion.hypercon.spec.ColorConfig;
  * Miscellaneous configuration items for the Hyperion daemon.
  */
 public class MiscConfig {
+
+	public HyperionRemoteCalls.SystemTypes selectedSystemType = HyperionRemoteCalls.SystemTypes.libreelec;
+
 // Blackborder
 	public boolean mBlackBorderEnabled = true;
 	public double mBlackBorderThreshold = 0.00;
@@ -18,7 +21,7 @@ public class MiscConfig {
 
 //Effect Engine
 	/** declare all paths **/
-	public String mPathOE = "/storage/hyperion/effects" ;
+	public String mPathLE = "/storage/.kodi/addons/service.hyperion/effects" ;
 	public String mPathGEN = "/usr/share/hyperion/effects" ;
 	/** Flag indicating that the boot sequence is enabled(true) or not(false) */
 	public boolean mBootEffectEnabled = true;
@@ -43,13 +46,25 @@ public class MiscConfig {
 	/** The height of 'grabbed' frames (screen shots) [pixels] */
 	public int mFrameGrabberHeight = 64;
 	/** The interval of frame grabs (screen shots) [ms] */
-	public int mFrameGrabberInterval_ms = 100;
+	public int mFrameGrabberInterval_ms = 50;
 	/** The Priority of the Internal Frame Grabber */
 	public int mFrameGrabberPriority = 890;
 
+//aml Grabber
+	/** Flag indicating that the Frame Grabber is enabled */
+	public boolean mAmlGrabberEnabled = false;
+	/** The width of 'grabbed' frames (screen shots) [pixels] */
+	public int mAmlGrabberWidth = 64;
+	/** The height of 'grabbed' frames (screen shots) [pixels] */
+	public int mAmlGrabberHeight = 64;
+	/** The interval of frame grabs (screen shots) [ms] */
+	public int mAmlGrabberInterval_ms = 25;
+	/** The Priority of the Internal Frame Grabber */
+	public int mAmlGrabberPriority = 890;
+
 //Kodi	
 	/** Flag indicating that the XBMC checker is enabled */
-	public boolean mXbmcCheckerEnabled = false;
+	public boolean mXbmcCheckerEnabled = true;
 	/** The IP-address of XBMC */
 	public String mXbmcAddress  = "127.0.0.1";
 	/** The TCP JSON-Port of XBMC */
@@ -73,6 +88,11 @@ public class MiscConfig {
 	public boolean mforwardEnabled = false;
 	public String mProtofield = "\"127.0.0.1:19447\"";
 	public String mJsonfield = "\"127.0.0.1:19446\"";
+
+//WebConfig Server
+	public int mWebConfigPort = 8099;
+	public String mPathWebRootLE = "/storage/.kodi/addons/service.hyperion/webconfig";
+	public String mPathWebRootGEN = "/usr/share/hyperion/webconfig";
 
 //Proto/Boblight/Json Server
 	/** The TCP port at which the JSON server is listening for incoming connections */
@@ -102,6 +122,22 @@ public class MiscConfig {
 			strBuf.addValue("priority", mFrameGrabberPriority, true);
 			strBuf.stopObject();
 				
+			strBuf.newLine();
+		}
+
+	// aml Grabber
+
+		if (mAmlGrabberEnabled==true){
+			String amlgrabComment = "AML GRABBER CONFIG";
+			strBuf.writeComment(amlgrabComment);
+
+			strBuf.startObject("amlgrabber");
+			strBuf.addValue("width", mAmlGrabberWidth, false);
+			strBuf.addValue("height", mAmlGrabberHeight, false);
+			strBuf.addValue("frequency_Hz", 1000.0/mAmlGrabberInterval_ms, false);
+			strBuf.addValue("priority", mAmlGrabberPriority, true);
+			strBuf.stopObject();
+
 			strBuf.newLine();
 		}
 
@@ -211,6 +247,22 @@ public class MiscConfig {
 			strBuf.newLine();	
 		}
 
+	// WebConfig Server
+
+			String WebserverComment = "WEBCONFIG SERVER";
+			strBuf.writeComment(WebserverComment);
+
+			strBuf.startObject("webConfig");
+			if (selectedSystemType.toString() == "LibreELEC"){
+				strBuf.addValue("document_root", mPathWebRootLE, false);
+			} else {
+				strBuf.addValue("document_root", mPathWebRootGEN, false);
+			}
+			strBuf.addValue("port", mWebConfigPort, true);
+			strBuf.stopObject();
+
+			strBuf.newLine();
+
 	// Effect Path
 
 			String effectPathComment = "EFFECT PATH";
@@ -218,7 +270,7 @@ public class MiscConfig {
 					
 			strBuf.startObject("effects");
 			strBuf.startArray("paths");
-			strBuf.addPathValue(mPathOE, false);
+			strBuf.addPathValue(mPathLE, false);
 			strBuf.addPathValue(mPathGEN, true);
 			strBuf.stopArray(true);
 			strBuf.stopObject();
@@ -227,6 +279,10 @@ public class MiscConfig {
 
 		if (mFrameGrabberEnabled==false){
 			String addComment = "NO FRAME GRABBER CONFIG";
+			strBuf.writeComment(addComment);
+		}
+		if (mAmlGrabberEnabled==false){
+			String addComment = "NO AML GRABBER CONFIG";
 			strBuf.writeComment(addComment);
 		}
 		if (mBlackBorderEnabled==false){

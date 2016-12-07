@@ -13,6 +13,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.LayoutStyle;
 
 import org.hyperion.hypercon.ErrorHandling;
 import org.hyperion.hypercon.SshConnectionModel;
@@ -34,6 +35,8 @@ public class SshManageHyperionPanel extends JPanel implements Observer {
 	private JButton mInstallHypButton;
 	private JButton mRemoveHypButton;
 	private JButton mStartHypButton;
+	private JButton mRestartHypButton;
+	private JButton mReloadHypButton;
 	private JButton mStopHypButton;
 	private JButton mGetLogHypButton;
 	
@@ -81,6 +84,16 @@ public class SshManageHyperionPanel extends JPanel implements Observer {
         mStartHypButton.addActionListener(mActionListener);
         add(mStartHypButton);
         
+        mRestartHypButton = new JButton(language.getString("ssh.sshmanage.RestartHypButton")); //$NON-NLS-1$
+        mRestartHypButton.setToolTipText(language.getString("ssh.sshmanage.RestartHypButtontooltip"));
+        mRestartHypButton.addActionListener(mActionListener);
+        add(mRestartHypButton);
+
+        mReloadHypButton = new JButton(language.getString("ssh.sshmanage.ReloadHypButton")); //$NON-NLS-1$
+        mReloadHypButton.setToolTipText(language.getString("ssh.sshmanage.ReloadHypButtontooltip"));
+        mReloadHypButton.addActionListener(mActionListener);
+        add(mReloadHypButton);
+
         mStopHypButton = new JButton(language.getString("ssh.sshmanage.StopHypButton")); //$NON-NLS-1$
         mStopHypButton.setToolTipText(language.getString("ssh.sshmanage.StopHypButtontooltip"));
         mStopHypButton.addActionListener(mActionListener);
@@ -92,24 +105,28 @@ public class SshManageHyperionPanel extends JPanel implements Observer {
         add(mGetLogHypButton);
         
     GroupLayout layout = new GroupLayout(this);
+    layout.setAutoCreateGaps(true);
+    layout.setAutoCreateContainerGaps(true);
     layout.setHorizontalGroup(
     	layout.createSequentialGroup()
     	.addGroup(layout.createParallelGroup()	
     	.addGroup(layout.createSequentialGroup()
-    			.addComponent(mInstallHypButton)
-    			.addComponent(mRemoveHypButton))
-    		.addGroup(layout.createSequentialGroup()
+                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED,
+                        GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         		.addComponent(mStartHypButton)
+        		.addComponent(mRestartHypButton)
+        		.addComponent(mReloadHypButton)
         		.addComponent(mStopHypButton)
-        		.addComponent(mGetLogHypButton))
+                .addComponent(mGetLogHypButton)
+                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED,
+                        GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
     		));
     layout.setVerticalGroup(
     	layout.createSequentialGroup()
     		.addGroup(layout.createParallelGroup()
-    			.addComponent(mInstallHypButton)
-    			.addComponent(mRemoveHypButton))
-    		.addGroup(layout.createParallelGroup()
         		.addComponent(mStartHypButton)
+        		.addComponent(mRestartHypButton)
+        		.addComponent(mReloadHypButton)
         		.addComponent(mStopHypButton)
         		.addComponent(mGetLogHypButton))
     		);
@@ -129,6 +146,8 @@ private void setConnectionFieldsAcces(boolean setEnabled) {
 	mInstallHypButton.setEnabled(setEnabled);
 	mRemoveHypButton.setEnabled(setEnabled);
 	mStartHypButton.setEnabled(setEnabled);
+	mRestartHypButton.setEnabled(setEnabled);
+	mReloadHypButton.setEnabled(setEnabled);
 	mStopHypButton.setEnabled(setEnabled);
 	mGetLogHypButton.setEnabled(setEnabled);
 }
@@ -178,6 +197,20 @@ private void setConnectionFieldsAcces(boolean setEnabled) {
 	        	if(e.getSource() == mStartHypButton){
 	        		try {
 	        			sshConnection.sendServiceStart();
+	                } catch (JSchException e1) {
+	                    ErrorHandling.ShowException(e1);
+	                }	
+	        	}
+	        	if(e.getSource() == mRestartHypButton){
+	        		try {
+	        			sshConnection.sendServiceRestart();
+	                } catch (JSchException e1) {
+	                    ErrorHandling.ShowException(e1);
+	                }	
+	        	}
+	        	if(e.getSource() == mReloadHypButton){
+	        		try {
+	        			sshConnection.sendServiceReload();
 	                } catch (JSchException e1) {
 	                    ErrorHandling.ShowException(e1);
 	                }	

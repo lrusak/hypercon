@@ -98,8 +98,8 @@ public class LoadSaveCreatePanel extends JPanel {
 		
 		msavesettingfileChooser = new JFileChooser();
 		msavesettingfileChooser.setCurrentDirectory(new java.io.File("."));
-		msavesettingfileChooser.setSelectedFile(new File("HyperCon_settings.dat"));
-		FileNameExtensionFilter filter = new FileNameExtensionFilter("(HyperCon) .dat", "dat");
+		msavesettingfileChooser.setSelectedFile(new File("HyperCon_settings.conf"));
+		FileNameExtensionFilter filter = new FileNameExtensionFilter("(HyperCon) .conf", "conf");
 		msavesettingfileChooser.setFileFilter(filter);
 		msavesettingfileChooser.addActionListener(mActionListener);		
 		
@@ -110,8 +110,8 @@ public class LoadSaveCreatePanel extends JPanel {
 		
 		mloadsettingfileChooser = new JFileChooser();
 		mloadsettingfileChooser.setCurrentDirectory(new java.io.File("."));
-		mloadsettingfileChooser.setSelectedFile(new File("HyperCon_settings.dat"));
-		FileNameExtensionFilter filter1 = new FileNameExtensionFilter("(HyperCon) .dat", "dat");
+		mloadsettingfileChooser.setSelectedFile(new File("HyperCon_settings.conf"));
+		FileNameExtensionFilter filter1 = new FileNameExtensionFilter("(HyperCon) .conf", "conf");
 		mloadsettingfileChooser.setFileFilter(filter1);
 		mloadsettingfileChooser.addActionListener(mActionListener);		
 
@@ -240,7 +240,7 @@ public class LoadSaveCreatePanel extends JPanel {
 				if (Desktop.isDesktopSupported()) {
 					Desktop desktop = Desktop.getDesktop();
 						if (desktop.isSupported(Desktop.Action.BROWSE)) {
-						desktop.browse(new URI("https://wiki.hyperion-project.org"));
+						desktop.browse(new URI("https://wiki.libreelec.tv/index.php?title=Hyperion"));
 		        }
 		    }
 		} catch (Exception e1) {

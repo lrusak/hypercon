@@ -10,8 +10,8 @@ import org.hyperion.hypercon.language.language;
 public final class HyperionRemoteCalls {
 
     public enum SystemTypes{
-        allsystems(language.getString("ssh.systemlist.allsystemsitem")),
-        openelec("OpenELEC / LE");
+        libreelec("LibreELEC"),
+        allsystems(language.getString("ssh.systemlist.allsystemsitem"));
 
         private final String text;
 
@@ -27,8 +27,8 @@ public final class HyperionRemoteCalls {
     public static String getHyperionRemoteCallForSystemType(SystemTypes type){
         if(type == SystemTypes.allsystems){
             return "hyperion-remote ";
-        }else if(type == SystemTypes.openelec){
-            return "/storage/hyperion/bin/hyperion-remote.sh ";
+        }else if(type == SystemTypes.libreelec){
+            return "/storage/.kodi/addons/service.hyperion/bin/hyperion-remote ";
         }
         return "";
     }
@@ -36,16 +36,16 @@ public final class HyperionRemoteCalls {
     public static String getGrabberv4l2CallForSystemType(SystemTypes type){
         if(type == SystemTypes.allsystems){
             return "hyperion-v4l2 ";
-        }else if(type == SystemTypes.openelec){
-            return "/storage/hyperion/bin/hyperion-v4l2.sh ";
+        }else if(type == SystemTypes.libreelec){
+            return "/storage/.kodi/addons/service.hyperion/bin/hyperion-v4l2 ";
         }
         return "";
     }
     public static String getConfigTargetCallForSystemType(SystemTypes type){
         if(type == SystemTypes.allsystems){
             return "/etc/hyperion/";
-        }else if(type == SystemTypes.openelec){
-            return "/storage/.config/";
+        }else if(type == SystemTypes.libreelec){
+            return "/storage/.kodi/userdata/addon_data/service.hyperion/";
         }
         return "";
     }
@@ -53,40 +53,48 @@ public final class HyperionRemoteCalls {
     public static String getHyperionInstallCallForSystemType(SystemTypes type){
         if(type == SystemTypes.allsystems){
             return "cd /tmp && wget -nv -N https://raw.github.com/hyperion-project/hyperion/master/bin/install_hyperion.sh && chmod +x install_hyperion.sh && sudo sh ./install_hyperion.sh HyperConInstall ; rm install_hyperion.sh";
-        }else if(type == SystemTypes.openelec){
-            return "cd /tmp && curl -# -k -L --output install_hyperion.sh --get https://raw.github.com/hyperion-project/hyperion/master/bin/install_hyperion.sh && sh ./install_hyperion.sh HyperConInstall ; rm install_hyperion.sh";
         }
         return "";
     }
     public static String getHyperionRemoveCallForSystemType(SystemTypes type){
         if(type == SystemTypes.allsystems){
             return "cd /tmp && wget -nv -N https://raw.github.com/hyperion-project/hyperion/master/bin/remove_hyperion.sh && chmod +x remove_hyperion.sh && sudo sh ./remove_hyperion.sh HyperConRemove ; rm remove_hyperion.sh";
-        }else if(type == SystemTypes.openelec){
-            return "cd /tmp && curl -# -k -L --output remove_hyperion.sh --get https://raw.github.com/hyperion-project/hyperion/master/bin/remove_hyperion.sh && sh ./remove_hyperion.sh HyperConRemove ; rm remove_hyperion.sh";
         }
         return "";
     }
     public static String getHyperionStartServiceCallForSystemType(SystemTypes type){
         if(type == SystemTypes.allsystems){
             return "sudo systemctl start hyperion.service 2>/dev/null ; sudo /etc/init.d/hyperion start 2>/dev/null ; sudo /sbin/initctl start hyperion 2>/dev/null";
-        }else if(type == SystemTypes.openelec){
-            return "/storage/.config/autostart.sh > /dev/null 2>&1 &";
+        }else if(type == SystemTypes.libreelec){
+            return "systemctl start service.hyperion.service 2>/dev/null";
+        }
+        return "";
+    }
+    public static String getHyperionRestartServiceCallForSystemType(SystemTypes type){
+        if(type == SystemTypes.libreelec){
+            return "systemctl restart service.hyperion.service 2>/dev/null";
+        }
+        return "";
+    }
+    public static String getHyperionReloadServiceCallForSystemType(SystemTypes type){
+        if(type == SystemTypes.libreelec){
+            return "systemctl reload service.hyperion.service 2>/dev/null";
         }
         return "";
     }
     public static String getHyperionStopServiceCallForSystemType(SystemTypes type){
         if(type == SystemTypes.allsystems){
             return "sudo systemctl stop hyperion.service 2>/dev/null; sudo /etc/init.d/hyperion stop 2>/dev/null ; sudo /sbin/initctl stop hyperion 2>/dev/null";
-        }else if(type == SystemTypes.openelec){
-            return "killall hyperiond 2>/dev/null";
+        }else if(type == SystemTypes.libreelec){
+            return "systemctl stop service.hyperion.service 2>/dev/null";
         }
         return "";
     }
     public static String getHyperionLogCallForSystemType(SystemTypes type){
         if(type == SystemTypes.allsystems){
             return "sudo journalctl -u hyperion.service 2>/dev/null";
-        }else if(type == SystemTypes.openelec){
-            return "cat /storage/logfiles/hyperion.log";
+        }else if(type == SystemTypes.libreelec){
+            return "journalctl -u service.hyperion.service 2>/dev/null";
         }
         return "";
     }

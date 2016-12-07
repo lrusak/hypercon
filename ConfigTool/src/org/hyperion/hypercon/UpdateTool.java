@@ -21,7 +21,7 @@ import org.xml.sax.SAXException;
 
 public class UpdateTool {
 
-	private static final String UPDATE_URL = "https://raw.githubusercontent.com/hyperion-project/hypercon/master/update.xml";
+	private static final String UPDATE_URL = "https://raw.githubusercontent.com/libreelec/hypercon/master/update.xml";
 	private static final String ACTUAL_VERSION = Main.versionStr;
 
 	public static void main(String[] args) {
@@ -49,11 +49,10 @@ public class UpdateTool {
 			Element rootElement = getElementFromURL(updateUrl);
 
 			String actualVersion = rootElement.getChildText("actualVersion");
-			String versionInfo = rootElement.getChildText("versionInfo");
 			String updateURL = rootElement.getChildText("updateURL");
 
 			if (isVersionActual(actualVersion)) {
-        	    String message=language.getString("general.versioncheck.newversionmessage") + "\n\n" + language.getString("general.versioncheck.currentversiontitle") +" "+ Main.versionStr + "\n" + language.getString("general.versioncheck.newversiontitle") +" "+ actualVersion + "\n" +  language.getString("general.versioncheck.changelogtitle") +" "+ versionInfo + "\n\n" + language.getString("general.versioncheck.askfordownload");
+        	    String message=language.getString("general.versioncheck.newversionmessage") + "\n\n" + language.getString("general.versioncheck.currentversiontitle") +" "+ Main.versionStr + "\n" + language.getString("general.versioncheck.newversiontitle") +" "+ actualVersion + "\n\n" + language.getString("general.versioncheck.askfordownload");
 		        int reply = JOptionPane.showConfirmDialog(new JFrame(), message, language.getString("general.HyperConInformationDialogTitle"),
 		        		    JOptionPane.YES_NO_OPTION);
 		        	 if (reply == JOptionPane.YES_OPTION) {
@@ -109,9 +108,9 @@ public class UpdateTool {
 	 * @return a {@link Boolean}
 	 */
 	private static boolean isVersionActual(String updateVersion) {
-		updateVersion = updateVersion.replace("V", "").replace(".", "");
+		updateVersion = updateVersion.replace(".", "");
 		Integer updateVersionAsInt = Integer.parseInt(updateVersion);
-		String actualVersion = ACTUAL_VERSION.replace("V", "").replace(".", "");
+		String actualVersion = ACTUAL_VERSION.replace(".", "");
 		Integer actualVersionAsInt = Integer.parseInt(actualVersion);
 		return updateVersionAsInt > actualVersionAsInt;
 	}

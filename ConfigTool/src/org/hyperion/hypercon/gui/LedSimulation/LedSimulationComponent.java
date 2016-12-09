@@ -41,7 +41,7 @@ public class LedSimulationComponent extends JPanel {
 		mTvImage.createGraphics().drawImage(pImage, 0, 0, mTvImage.getWidth(), mTvImage.getHeight(), null);
 	}
 	{
-		Image image = new ImageIcon(LedSimulationComponent.class.getResource("TestImage_01.jpg")).getImage();
+		Image image = new ImageIcon(LedSimulationComponent.class.getResource("LibreELEC_01.jpg")).getImage();
 		mTvImage.createGraphics().drawImage(image, 0, 0, mTvImage.getWidth(), mTvImage.getHeight(), null);
 	}
 
@@ -345,6 +345,7 @@ public class LedSimulationComponent extends JPanel {
 			mPopupMenu.add(mTakeGrabberScreenshotAction);
 			
 			JMenu selectMenu = new JMenu(language.getString("general.selectimagelabel"));
+			selectMenu.add(new SelectImageAction("LibreELEC_01"));
 			selectMenu.add(new SelectImageAction("TestImage_01")); 
 			selectMenu.add(new SelectImageAction("TestImage_02")); 
 			selectMenu.add(new SelectImageAction("TestImage_03")); 
